@@ -62,6 +62,33 @@ The **UPDATE EXCEL** action appends confirmed new issue numbers to the existing 
 
 The **RUN QA** action launches a separate set of verification scripts. These scripts independently inspect the publication sources and report structural changes or irregularities that may have remained undetected during the production run.
 
+## QA Modernization & Performance Optimization
+
+The platform's independent QA layer was modernized to improve execution efficiency, maintainability, and diagnostic accuracy while preserving existing production functionality.
+
+The modernization covered 35 independent QA modules, using a hybrid approach based on Requests, BeautifulSoup, and Selenium WebDriver, depending on the technical requirements of each publication source.
+
+Key improvements include:
+
+- Optimized 35 source-specific QA modules while preserving established validation rules and website-specific handling.
+- Replaced unnecessary browser automation with direct HTTP requests and HTML parsing where technically appropriate.
+- Standardized QA reporting to distinguish successful checks, structural changes, temporary source unavailability, and QA execution errors.
+- Maintained independent QA modules that can be updated without rebuilding the desktop GUI application.
+- Preserved the separation between production monitoring and independent quality verification.
+
+### Measured Performance Improvement
+
+| Metric | Before | After |
+|---|---|---|
+| QA execution time | 5 min 24 sec | 1 min 44.86 sec |
+| QA modules | 34 | 35 |
+| Execution speed | Baseline | 3.09× faster |
+| Execution time reduction | — | 67.6% |
+
+All 35 QA modules successfully passed individual functional testing following modernization.
+
+The optimization significantly reduced execution time while retaining the existing production architecture and source-specific verification logic.
+
 ## Business Impact
 
 - Centralized the management of a growing collection of production and QA automation scripts.
@@ -73,12 +100,15 @@ The **RUN QA** action launches a separate set of verification scripts. These scr
 - Enabled earlier detection of website changes and automation discrepancies.
 - Simplified maintenance by keeping source-specific logic in independent modules.
 - Reduced repetitive navigation, comparison, and data-entry work.
+- Reduced the complete QA verification cycle by 67.6%, from approximately 5 minutes 24 seconds to 1 minute 45 seconds.
+- Improved QA maintainability and diagnostic consistency through standardized reporting and optimized source-specific verification modules.
 
 ## Key Features
 
 - Centralized desktop GUI
 - Production-script orchestration
-- Independent QA verification cycle
+- Independent QA verification across 35 source-specific modules
+* Standardized QA status reporting and error classification
 - Monitoring across dozens of official gazette sources
 - Automatic detection of newly published issues
 - Comparison with existing Excel records
@@ -106,7 +136,7 @@ The **RUN QA** action launches a separate set of verification scripts. These scr
 - Browser automation
 - Windows Desktop Automation
 
-The project currently includes **72 Python files** and uses **21 distinct Python libraries and standard-library modules** across its production, QA, orchestration, and interface layers.
+The project currently includes 72 Python files organized across its production, QA, orchestration, and interface layers, using a combination of browser automation, HTTP-based data retrieval, HTML parsing, and desktop workflow automation.
 
 ## Notes
 
